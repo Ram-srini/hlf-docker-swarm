@@ -21,14 +21,14 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == intel-sawtooth
+                    - node.hostname == iris-desktop
         image: hyperledger/fabric-ca:x86_64-1.1.0
         hostname: ca.org7.example.com
         environment:
             - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
             - FABRIC_CA_SERVER_CA_NAME=ca_org7
             - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org7.example.com-cert.pem
-            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/a10dd863d532072370771867764f777f6a64bc3d4793be127835f48a41000693_sk
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/c8ba95a5c8be9afcfa17df8e5cbba91a80927b4a17c0701fcbe10f463a758c71_sk
         ports:
             - 14054:7054   
         command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
@@ -44,23 +44,9 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == intel-sawtooth
+                    - node.hostname == iris-desktop
         image: hyperledger/fabric-couchdb:x86_64-0.4.6
         hostname: couchdb0_org7
         networks:
            - skcript
 
-    couchdb1_org7:
-        deploy:
-            replicas: 1
-            restart_policy:
-                condition: on-failure
-                delay: 5s
-                max_attempts: 3
-            placement:
-                constraints:
-                    - node.hostname == intel-sawtooth
-        image: hyperledger/fabric-couchdb:x86_64-0.4.6
-        hostname: couchdb1_org7
-        networks:
-           - skcript

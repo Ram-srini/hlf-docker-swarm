@@ -75,6 +75,7 @@ docker exec -e "CORE_PEER_LOCALMSPID=Org6MSP" -e "CORE_PEER_TLS_CERT_FILE=/opt/g
 # ============================
 docker exec -e "CORE_PEER_LOCALMSPID=Org7MSP" -e "CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ch.example.com/peers/peer0.org7.example.com/tls/server.crt" -e "CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org7.example.com/peers/peer0.org7.example.com/tls/server.key" -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org7.example.com/peers/peer0.org7.example.com/tls/ca.crt" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org7.example.com/users/Admin@org7.example.com/msp" -e "CORE_PEER_ADDRESS=peer0.org7.example.com:7051" "$CLI_NAME" peer chaincode instantiate -o "$ORDERER_NAME":7050 -C "$CHANNEL_NAME" -n "$CC_NAME1" "$CC_SRC1" -v v0  -c '{"Args":[]}' -P "OR('O    rg1MSP.member', 'Org2MSP.member', 'Org3MSP.member' )" --tls --cafile $ORDERER_CA
 
+sleep 20
 # ============================
 # INSTALLING CHAINCODE2 IN ORG1
 # ============================
@@ -114,7 +115,7 @@ docker exec -e "CORE_PEER_LOCALMSPID=Org7MSP" -e "CORE_PEER_TLS_CERT_FILE=/opt/g
 # ===========================
 docker exec "$CLI_NAME" peer chaincode instantiate -o "$ORDERER_NAME":7050 -C "$CHANNEL_NAME" -n "$CC_NAME2" "$CC_SRC2" -v v0  -c '{"Args":[]}' -P "OR('Org1MSP.member', 'Org2MSP.member', 'Org3MSP.member' )" --tls --cafile $ORDERER_CA
 
-sleep 3
+sleep 10
 
 # ============================
 # INSTANTIATING CHAINCODE2 IN ORG2

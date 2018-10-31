@@ -354,6 +354,7 @@ Orderer: &OrdererDefaults
             - kafka1:9092
             - kafka2:9092
             - kafka3:9092
+            - kafka4:9092
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network

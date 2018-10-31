@@ -7,6 +7,7 @@ networks:
       name: skcript
 
 services:
+
   kafka4:
     deploy:
       replicas: 1
@@ -16,23 +17,25 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == enyo-desktop
-    hostname: kafka0
+          - node.hostname == server01
+    hostname: kafka4
     image: hyperledger/fabric-kafka
     # Give network alias
     networks:
       skcript:
         aliases:
-          - kafka0
+          - kafka4
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=skcript
-      - KAFKA_BROKER_ID=0
+      - KAFKA_BROKER_ID=4
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
       - KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS=36000
       - KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS=36000
+    ports:
+      - 49092:9092
 

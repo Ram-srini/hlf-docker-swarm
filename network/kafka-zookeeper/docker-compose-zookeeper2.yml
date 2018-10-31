@@ -22,7 +22,7 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == brizo-desktop
+          - node.hostname == server01
     image: hyperledger/fabric-zookeeper
     # Give network alias
     networks:

@@ -17,7 +17,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == gaia-desktop
+                    - node.hostname == server01
         image: hyperledger/fabric-couchdb:latest
         hostname: couchdb1_org3
         networks:

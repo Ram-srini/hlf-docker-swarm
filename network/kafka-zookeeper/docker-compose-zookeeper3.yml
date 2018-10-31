@@ -16,7 +16,7 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == chaos-desktop
+          - node.hostname == server01
     hostname: zookeeper2.example.com
     image: hyperledger/fabric-zookeeper
     # Give network alias

@@ -17,7 +17,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == kotys-desktop
+                    - node.hostname == server01
         image: hyperledger/fabric-peer:1.3.0
         hostname: peer0.org5.example.com
         environment:
@@ -65,4 +65,5 @@ services:
                 - peer0.org5.example.com
         ports:
           - 15051:7051
+          - 15052:7052
           - 15053:7053

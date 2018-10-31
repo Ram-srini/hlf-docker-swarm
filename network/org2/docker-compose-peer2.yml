@@ -17,7 +17,7 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == doris-desktop
+          - node.hostname == server01
     image: hyperledger/fabric-peer:1.3.0
     hostname: peer1.org2.example.com
     environment:
@@ -63,5 +63,6 @@ services:
           - peer1.org2.example.com
     ports:
       - 9061:7051
+      - 9062:7052
       - 9063:7053
       

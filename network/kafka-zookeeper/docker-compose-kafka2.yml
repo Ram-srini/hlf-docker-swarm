@@ -17,7 +17,7 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == brizo-desktop
+          - node.hostname == server01
     hostname: kafka1
     image: hyperledger/fabric-kafka
     # Give network alias
@@ -36,4 +36,6 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
       - KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS=36000
       - KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS=36000
+    ports:
+      - 19092:9092
 

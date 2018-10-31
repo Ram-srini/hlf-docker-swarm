@@ -16,7 +16,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == brizo-desktop
+                    - node.hostname == server01
         image: hyperledger/fabric-couchdb:latest
         hostname: couchdb1_org1
         networks:

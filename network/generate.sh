@@ -13,18 +13,25 @@ export FABRIC_CFG_PATH=${PWD}
 # remove previous crypto material and config transactions
 rm -fr config/*
 rm -fr crypto-config/*
-mkdir -p crypto-config config
+mkdir -p crypto-config config crypto-config/idemix
 
 
-# generate crypto material
+# generate crypto material using cryptogen
 cryptogen generate --config=./crypto-config.yaml
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate crypto material..."
   exit 1
 fi
 
+#Generate idemix crypto material using idemixgen tool
+CURDIR=`pwd`
+cd crypto-config/idemix
+idemixgen ca-keygen
+idemixgen signerconfig -u OU1 -e OU1 -r 1
+cd $CURDIR
+
 # generate genesis block for orderer
-configtxgen -profile OrdererGenesis -outputBlock ./config/genesis.block
+configtxgen -profile OrdererGenesis -channelID $CHANNEL_NAME -outputBlock ./config/genesis.block
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate orderer genesis block..."
   exit 1
@@ -71,17 +78,3 @@ if [ "$?" -ne 0 ]; then
   echo "Failed to generate anchor peer update for Org3MSP..."
   exit 1
 fi
-# generate anchor peer for My Channel transaction as ORG6 Org
-configtxgen -profile ${CHANNEL_PROFILE} -outputAnchorPeersUpdate ./config/ORG6${ANCHOR_TX} -channelID $CHANNEL_NAME -asOrg Org6MSP
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org3MSP..."
-  exit 1
-fi
-# generate anchor peer for My Channel transaction as ORG7 Org
-configtxgen -profile ${CHANNEL_PROFILE} -outputAnchorPeersUpdate ./config/ORG7${ANCHOR_TX} -channelID $CHANNEL_NAME -asOrg Org7MSP
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org3MSP..."
-  exit 1
-fi
-
-

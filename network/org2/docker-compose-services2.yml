@@ -1,0 +1,25 @@
+
+version: '3.2'
+
+networks:
+    skcript:
+        external: 
+            name: skcript
+
+services:
+
+    couchdb1_org2:
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement:
+                constraints:
+                    - node.hostname == doris-desktop
+        image: hyperledger/fabric-couchdb:latest
+        hostname: couchdb1_org2
+        networks:
+           - skcript
+

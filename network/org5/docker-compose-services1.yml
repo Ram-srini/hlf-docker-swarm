@@ -1,0 +1,52 @@
+
+version: '3.2'
+
+networks:
+    skcript:
+        external: 
+            name: skcript
+
+services:
+
+    ca_org5:
+        networks:
+            skcript:
+                aliases:
+                    - ca_org5
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement:
+                constraints:
+                    - node.hostname == kotys-desktop
+        image: hyperledger/fabric-ca:1.3.0
+        hostname: ca.org5.example.com
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca_org5
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org5.example.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3c07424f50f3a994ef6970287c615114a4842f4d0c594e6305382bc3c4c2ccf9_sk
+        ports:
+            - 12054:7054   
+        command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+        volumes:
+            - /var/mynetwork/certs/crypto-config/peerOrganizations/org5.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+
+    couchdb0_org5:
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement:
+                constraints:
+                    - node.hostname == kotys-desktop
+        image: hyperledger/fabric-couchdb:latest
+        hostname: couchdb0_org5
+        networks:
+           - skcript
+

@@ -11,10 +11,11 @@ mkdir -p /var/mynetwork/fabric-src
 
 git clone https://github.com/hyperledger/fabric /var/mynetwork/fabric-src/hyperledger/fabric
 cd /var/mynetwork/fabric-src/hyperledger/fabric
-git checkout release-1.1
+git checkout release-1.3
 cd -
 cp -R crypto-config /var/mynetwork/certs/
 cp -R config /var/mynetwork/certs/
+cp -R idemix-config /var/mynetwork/certs/
 cp -R ../chaincode_simple/* /var/mynetwork/chaincode_simple/
 cp -R ../chaincode_smallbank/* /var/mynetwork/chaincode_smallbank/
 cp -R bin/* /var/mynetwork/bin/

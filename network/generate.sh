@@ -23,6 +23,10 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
+#Generate idemix crypto material using idemixgen tool
+idemixgen ca-keygen
+idemixgen signerconfig -u OU1 -e OU1 -r 1
+
 # generate genesis block for orderer
 configtxgen -profile OrdererGenesis -outputBlock ./config/genesis.block
 if [ "$?" -ne 0 ]; then

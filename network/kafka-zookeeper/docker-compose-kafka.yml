@@ -16,9 +16,9 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == Sys1
+          - node.hostname == ansible-fabric
     hostname: kafka0
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
       skcript:
@@ -45,9 +45,9 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == Sys1
+          - node.hostname == ansible-fabric
     hostname: kafka1
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
       skcript:
@@ -74,9 +74,9 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == Sys1
+          - node.hostname == ansible-fabric
     hostname: kafka2
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
       skcript:
@@ -103,9 +103,9 @@ services:
         max_attempts: 3
       placement:
         constraints:
-          - node.hostname == Sys1
+          - node.hostname == ansible-fabric
     hostname: kafka3
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
       skcript:

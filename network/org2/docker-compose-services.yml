@@ -2,15 +2,15 @@
 version: '3.2'
 
 networks:
-    skcript:
+    fabric:
         external: 
-            name: skcript
+            name: fabric
 
 services:
 
     ca_org2:
         networks:
-            skcript:
+            fabric:
                 aliases:
                     - ca_org2
         deploy:
@@ -22,13 +22,13 @@ services:
             placement:
                 constraints:
                     - node.hostname == ansible-fabric
-        image: hyperledger/fabric-ca:1.3.0
+        image: hyperledger/fabric-ca:1.4.0
         hostname: ca.org2.example.com
         environment:
             - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
             - FABRIC_CA_SERVER_CA_NAME=ca_org2
             - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem
-            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/58ff5e53490bb5d21e10b29272533242d7455287bf6d138b16cf29f5f21623a6_sk
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/945a059a749fe789575f7285e0c74ffdb5043e762a90e8359a84332921325bd1_sk
         ports:
             - "8054:7054"   
         command: sh -c 'fabric-ca-server start --ca.certfile $FABRIC_CA_SERVER_CA_CERTFILE --ca.keyfile $FABRIC_CA_SERVER_CA_KEYFILE -b admin:adminpw -d'
@@ -48,7 +48,7 @@ services:
         image: hyperledger/fabric-couchdb:latest
         hostname: couchdb0_org2
         networks:
-           - skcript
+           - fabric
 
     couchdb1_org2:
         deploy:
@@ -63,4 +63,4 @@ services:
         image: hyperledger/fabric-couchdb:latest
         hostname: couchdb1_org2
         networks:
-           - skcript
+           - fabric

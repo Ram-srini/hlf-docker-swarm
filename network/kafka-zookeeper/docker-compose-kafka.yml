@@ -1,10 +1,10 @@
 version: '3.2'
 #
 networks:
-  skcript:
+  fabric:
     # If network is created with deplyment, Chaincode container cannot connect to network
     external:
-      name: skcript
+      name: fabric
 
 services:
   kafka0:
@@ -21,14 +21,14 @@ services:
     image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
-      skcript:
+      fabric:
         aliases:
           - kafka0
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=skcript
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric
       - KAFKA_BROKER_ID=0
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
@@ -50,14 +50,14 @@ services:
     image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
-      skcript:
+      fabric:
         aliases:
           - kafka1
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=skcript
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric
       - KAFKA_BROKER_ID=1
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA.MIN_INSYNC_REPLICAS=2
@@ -79,14 +79,14 @@ services:
     image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
-      skcript:
+      fabric:
         aliases:
           - kafka2
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=skcript
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric
       - KAFKA_BROKER_ID=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA.MIN_INSYNC_REPLICAS=2
@@ -108,14 +108,14 @@ services:
     image: hyperledger/fabric-kafka:latest
     # Give network alias
     networks:
-      skcript:
+      fabric:
         aliases:
           - kafka3
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=skcript
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric
       - KAFKA_BROKER_ID=3
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA.MIN_INSYNC_REPLICAS=2

@@ -2,9 +2,9 @@
 version: '3.2'
 
 networks:
-    skcript:
+    fabric:
         external: 
-            name: skcript
+            name: fabric
 
 services:
 
@@ -18,7 +18,7 @@ services:
             placement:
                 constraints:
                     - node.hostname == ansible-fabric
-        image: hyperledger/fabric-orderer:1.3.0
+        image: hyperledger/fabric-orderer:1.4.0
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer
         hostname: orderer0.example.com
@@ -60,6 +60,6 @@ services:
             - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls:/var/hyperledger/tls
             - /var/mynetwork/certs/config/:/var/hyperledger/config
         networks:
-          skcript:
+          fabric:
             aliases:
                 - orderer0.example.com

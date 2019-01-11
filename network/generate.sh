@@ -13,7 +13,8 @@ export FABRIC_CFG_PATH=${PWD}
 # remove previous crypto material and config transactions
 rm -fr config/*
 rm -fr crypto-config/*
-mkdir -p crypto-config config
+rm -fr idemix-config/*
+mkdir -p crypto-config idemix-config config
 
 
 # generate crypto material
@@ -28,7 +29,7 @@ idemixgen ca-keygen
 idemixgen signerconfig -u OU1 -e OU1 -r 1
 
 # generate genesis block for orderer
-configtxgen -profile OrdererGenesis -outputBlock ./config/genesis.block
+configtxgen -profile OrdererGenesis -channelID $CHANNEL_NAME -outputBlock ./config/genesis.block
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate orderer genesis block..."
   exit 1

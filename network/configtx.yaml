@@ -4,7 +4,6 @@ Organizations:
         Name: OrdererOrg
         ID: OrdererMSP
         MSPDir: crypto-config/ordererOrganizations/example.com/msp
-        AdminPrincipal: Role.ADMIN
 
         Policies:
             Readers:
@@ -21,7 +20,6 @@ Organizations:
         Name: Org1MSP
         ID: Org1MSP
         MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
-        AdminPrincipal: Role.ADMIN
 
         Policies:
             Readers:
